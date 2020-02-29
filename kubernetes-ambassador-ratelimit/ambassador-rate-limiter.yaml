@@ -35,6 +35,6 @@ spec:
     spec:
       containers:
       - name: ratelimiter
-        image: danielbryantuk/ratelimiter:0.3
+        image: ssmiller25/ratelimiter:0.3
         ports:
         - containerPort: 50051
