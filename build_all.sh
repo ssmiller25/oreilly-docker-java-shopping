@@ -1,12 +1,13 @@
 #!/bin/bash
 
 cd shopfront
-mvn clean install
-cd ..
-cd productcatalogue
-mvn clean install
-cd ..
-cd stockmanager
-mvn clean install
+docker build -t ssmiller25/djshopfront . 
 cd ..
 
+cd productcatalogue
+docker build -t ssmiller25/djproductcatalogue .
+cd ..
+
+cd stockmanager
+docker build -t ssmiller25/djstockmanager . 
+cd ..
