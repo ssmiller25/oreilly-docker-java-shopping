@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: shopfront-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: shopfront
+          servicePort: 8010
+        path: /
+    host: shopfront-ssmiller25.cloud.okteto.net
+

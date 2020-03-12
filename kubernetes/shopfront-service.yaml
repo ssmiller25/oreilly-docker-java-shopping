@@ -6,21 +6,29 @@ metadata:
   labels:
     app: shopfront
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: shopfront
   ports:
   - protocol: TCP
     port: 8010
     name: http
-
 ---
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: shopfront
+  labels:
+    app: shopfront
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: shopfront
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
   template:
     metadata:
       labels:
@@ -28,7 +36,7 @@ spec:
     spec:
       containers:
       - name: djshopfront
-        image: ssmiller25/djshopfront:1.0
+        image: ssmiller25/djshopfront:latest
         ports:
         - containerPort: 8010
         livenessProbe:

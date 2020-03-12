@@ -1,0 +1,7 @@
+nameSpace: ssmiller25
+resources:
+  - productcatalogue-service.yaml
+  - stockmanager-service.yaml
+  - shopfront-service.yaml
+  - shopfront-ingress.yaml
+

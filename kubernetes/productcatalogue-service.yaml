@@ -6,7 +6,8 @@ metadata:
   labels:
     app: productcatalogue
 spec:
-  type: NodePort
+  type: ClusterIP
+  sessionAffinity: None
   selector:
     app: productcatalogue
   ports:
@@ -15,12 +16,22 @@ spec:
     name: http
 
 ---
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: productcatalogue
+  labels:
+    app: productcatalogue
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: productcatalogue
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -28,7 +39,7 @@ spec:
     spec:
       containers:
       - name: productcatalogue
-        image: ssmiller25/djproductcatalogue:1.0
+        image: ssmiller25/djproductcatalogue:latest
         ports:
         - containerPort: 8020
         livenessProbe:

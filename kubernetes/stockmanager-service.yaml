@@ -6,7 +6,7 @@ metadata:
   labels:
     app: stockmanager
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: stockmanager
   ports:
@@ -15,12 +15,22 @@ spec:
     name: http
 
 ---
-apiVersion: v1
-kind: ReplicationController
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: stockmanager
+  labels:
+    app: stockmanager
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: stockmanager
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -28,7 +38,7 @@ spec:
     spec:
       containers:
       - name: stockmanager
-        image: ssmiller25/djstockmanager:1.0
+        image: ssmiller25/djstockmanager:latest
         ports:
         - containerPort: 8030
         livenessProbe:
