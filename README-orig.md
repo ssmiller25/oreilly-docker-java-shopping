@@ -1,10 +1,3 @@
-# K8S Intro with O'Reilly's Docker Java Shopping
-
-This repo is a modification of the original [Docker Java Shopping](https://github.com/danielbryantuk/oreilly-docker-java-shopping) for use in my [Kubernetes Intro Presentation](https://github.com/ssmiller25/k8s-intro).  The original book and
-repo are still great, but this will be updated with more modern build and deployment configurations.
-
-The original readme is at [README-orig.md](README-orig.md).  You may wish to switch to the master branch as well for all code examples.
-
 # oreilly-docker-java-shopping
 This repo contains code samples from my O'Reilly minibook ["Containerizing Continuous Delivery in Java: Docker Integration for Build Pipelines and Application Architecture"](https://www.nginx.com/resources/library/containerizing-continuous-delivery-java/).
 
