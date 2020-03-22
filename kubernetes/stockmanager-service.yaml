@@ -41,9 +41,9 @@ spec:
         image: ssmiller25/djstockmanager:latest
         ports:
         - containerPort: 8030
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8030
-          initialDelaySeconds: 30
-          timeoutSeconds: 1
+        #livenessProbe:
+        #  httpGet:
+        #    path: /health
+        #    port: 8030
+        #  initialDelaySeconds: 30
+        #  timeoutSeconds: 10
