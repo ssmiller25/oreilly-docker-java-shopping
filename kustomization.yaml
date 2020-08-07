@@ -1,0 +1,11 @@
+# apiVersion and kind of Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: javashop
+resources:
+  - manifests/productcatalogue.yaml
+  - manifests/stockmanager.yaml
+  - manifests/shopfront.yaml
+  - manifests/shopfront-ingress.yaml
+

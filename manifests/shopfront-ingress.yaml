@@ -10,5 +10,4 @@ spec:
           serviceName: shopfront
           servicePort: 8010
         path: /
-    host: shopfront-ssmiller25.cloud.okteto.net
 
