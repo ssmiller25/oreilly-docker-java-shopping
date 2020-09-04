@@ -25,7 +25,7 @@ This README is intended to provide high-level guidance of the project, and detai
 
 ## Kubernetes Deployment
 
-To use, use a Kustomize file to pull in the configuration remotely:
+To use, use a Kustomize file to pull in the configuration remotely.  An example is in [example-deploy/](example-deploy/)
 
 ```yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
@@ -43,3 +43,4 @@ Then can be applied with
 kubectl apply -k ./
 ```
 
+This assumed the "myjavashop" namespace already exists.
