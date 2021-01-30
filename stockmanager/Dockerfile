@@ -1,4 +1,4 @@
-FROM maven:3-jdk-8 as builder
+FROM quay.io/ssmiller25/maven:3-jdk-8 as builder
 COPY pom.xml /tmp/
 COPY src /tmp/src/
 WORKDIR /tmp/

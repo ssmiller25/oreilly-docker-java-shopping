@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: productcatalogue
-        image: ssmiller25/djproductcatalogue:latest
+        image: quay.io/ssmiller25/djproductcatalogue:latest
         ports:
         - containerPort: 8020
         livenessProbe:

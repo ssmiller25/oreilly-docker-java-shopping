@@ -1,4 +1,6 @@
-DOCKER_REPO="ssmiller25"
+git_hash = $(shell git rev-parse --short -q HEAD)
+maven_version = 3-jdk-8
+DOCKER_REPO="quay.io/ssmiller25"
 
 CIVO_CMD="civo"
 # For Dockerize CIVO
@@ -11,15 +13,24 @@ KUBECTL=kubectl --kubeconfig=$(KUBECONFIG)
 
 .PHONY: build
 build:
-	@docker build -t ${DOCKER_REPO}/djshopfront shopfront/
-	@docker build -t ${DOCKER_REPO}/djproductcatalogue productcatalogue/
-	@docker build -t ${DOCKER_REPO}/djstockmanager stockmanager/
+	@docker build -t ${DOCKER_REPO}/djshopfront:${git_hash} shopfront/
+	@docker build -t ${DOCKER_REPO}/djproductcatalogue:${git_hash} productcatalogue/
+	@docker build -t ${DOCKER_REPO}/djstockmanager:${git_hash} stockmanager/
 
 .PHONY: push
 push:
-	@docker push ${DOCKER_REPO}/djshopfront
-	@docker push ${DOCKER_REPO}/djproductcatalogue
-	@docker push ${DOCKER_REPO}/djstockmanager
+	@for image in djshopfront djproductcatalogue djstockmanager; do \
+		docker tag ${DOCKER_REPO}/${image}:${git_hash} ${DOCKER_REPO}/${image}:latest; \
+		docker push ${DOCKER_REPO}/${image}:${git_hash}; \
+	done
+
+maven:${maven_version}
+# Pull and cache dependent images
+.PHONY: 
+cache-upstream:
+	docker pull maven:${maven_version}
+	docker tag maven:${maven_version} $(DOCKER_REPO)/maven:${maven_version}
+	docker push $(DOCKER_REPO)/maven:${maven_version}
 
 .PHONY: civo-up
 civo-up: $(KUBECONFIG)
@@ -34,3 +45,6 @@ civo-down:
 	@echo "Removing $(CLUSTER_NAME)"
 	@$(CIVO_CMD) k3s remove $(CLUSTER_NAME)
 	@rm $(KUBECONFIG)
+
+
+

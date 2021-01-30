@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: stockmanager
-        image: ssmiller25/djstockmanager:latest
+        image: quay.io/ssmiller25/djstockmanager:latest
         ports:
         - containerPort: 8030
         #livenessProbe:
