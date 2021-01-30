@@ -1,7 +1,7 @@
 git_hash = $(shell git rev-parse --short -q HEAD)
 maven_version = 3-jdk-8
 jdk_version = 8-jre
-DOCKER_REPO="quay.io/ssmiller25"
+DOCKER_REPO=quay.io/ssmiller25
 
 CIVO_CMD="civo"
 # For Dockerize CIVO
