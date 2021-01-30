@@ -21,8 +21,8 @@ build:
 .PHONY: push
 push:
 	@for image in djshopfront djproductcatalogue djstockmanager; do \
-		docker tag ${DOCKER_REPO}/${image}:${git_hash} ${DOCKER_REPO}/${image}:latest; \
-		docker push ${DOCKER_REPO}/${image}:${git_hash}; \
+		docker tag ${DOCKER_REPO}/$${image}:${git_hash} ${DOCKER_REPO}/$${image}:latest; \
+		docker push ${DOCKER_REPO}/$${image}:${git_hash}; \
 	done
 
 maven:${maven_version}
