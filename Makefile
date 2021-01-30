@@ -1,5 +1,6 @@
 git_hash = $(shell git rev-parse --short -q HEAD)
 maven_version = 3-jdk-8
+jdk_version = 8-jre
 DOCKER_REPO="quay.io/ssmiller25"
 
 CIVO_CMD="civo"
@@ -29,8 +30,11 @@ maven:${maven_version}
 .PHONY: 
 cache-upstream:
 	docker pull maven:${maven_version}
+	docker pull openjdk:${jdk_version}
 	docker tag maven:${maven_version} $(DOCKER_REPO)/maven:${maven_version}
+	docker tag openjdk:${jdk_version} $(DOCKER_REPO)/openjdk:${jdk_version}
 	docker push $(DOCKER_REPO)/maven:${maven_version}
+	docker push $(DOCKER_REPO)/openjdk:${jdk_version}
 
 .PHONY: civo-up
 civo-up: $(KUBECONFIG)
